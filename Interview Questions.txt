@@ -9,3 +9,8 @@ what is command to pull the images
 how to see running containers
 how to check container logs
 explain about docker architecture
+------------------ Docker file -----------------------------
+What is Dockerfile
+what is the diff b/w copy and add
+diff b/w env and arg
+what is the command to build a Dockerfile
