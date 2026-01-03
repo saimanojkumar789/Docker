@@ -5,7 +5,8 @@ It contains set of instructions
 It contains some components
  
 
-FROM : used to declare the base imagesex: FROM python
+FROM : used to declare the base images
+ex: FROM python
 ex: FROM node
 ex: FROM ubuntu
 LABEL : used to add the description about image
