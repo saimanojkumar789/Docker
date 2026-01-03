@@ -1,0 +1,11 @@
+What is Docker
+What is Containerization
+Diff between vm and container
+what is docker image
+what is container
+diff b/w container and image
+what is command to create a container
+what is command to pull the images
+how to see running containers
+how to check container logs
+explain about docker architecture
