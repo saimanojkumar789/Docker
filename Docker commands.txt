@@ -1,5 +1,6 @@
 To see the list of images : docker images
 To pull the image : docker pull image-name
+To build the docker image: docker build -t img-name:tag-name .
 To create a container : docker run -d --name cont-name -p host-port:container-port image-name
 To see running containers : docker ps
 To see all containers : docker ps -a
@@ -19,3 +20,4 @@ To get the container logs : docker logs cont-name
 To enter into the container : docker exec -it cont-name bash
 To get full info about image : docker inspect image image-name
 To find all the containers created by single image: docker ps -a | grep -i "image-name"
+To delete all the dangling images: docker image prune
