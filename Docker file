@@ -9,12 +9,12 @@ FROM : used to declare the base images
 ex: FROM python
 ex: FROM node 
 ex: FROM ubuntu
-LABEL : used to add the description about image  (only for coumentation)
-MAINTAINER : used to define the author details   (only for coumentation)
+LABEL : used to add the description about image  (only for docoumentation)
+MAINTAINER : used to define the author details   (only for docoumentation)
 COPY : used to copy the files from local to container.
 ADD : used to copy the files from local to container and it will download the files from internet and send those files to container.
 ARG : used to pass the variables while we build the image - these vars will not be available inside the container, we can overwrite these values while we build the image
 ENV : used top pass the variables - these vars will be available inside the container, we can’t overwrite these values while we build the image
 WORKDIR : used to set a default path for our container
 RUN : used to execute the commands
-EXPOSE : used to expose the port number          (only for coumentation)
+EXPOSE : used to expose the port number          (only for docoumentation)
