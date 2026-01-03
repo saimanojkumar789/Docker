@@ -1,0 +1,21 @@
+To see the list of images : docker images
+To pull the image : docker pull image-name
+To create a container : docker run -d --name cont-name -p host-port:container-port image-name
+To see running containers : docker ps
+To see all containers : docker ps -a
+To stop the container : docker stop cont-name
+To stop multiple containers : docker stop cont-1 cont-2 cont-3
+To stop all containers : docker stop $(docker ps)
+To start a container : docker start cont-name
+To start multiple containers : docker start cont-1 cont-2 cont-3
+To start all containers : docker start $(docker ps -a)
+To remove a stopped container : docker rm cont-name
+To remove a running container : docker rm -f cont-name
+To remove all stopped containers : docker rm $(docker ps -a)
+To remove an image : docker rmi image-name
+To remove unused images : docker rmi $(docker images)
+To get the full info about container : docker inspect cont-name
+To get the container logs : docker logs cont-name
+To enter into the container : docker exec -it cont-name bash
+To get full info about image : docker inspect image image-name
+To find all the containers created by single image: docker ps -a | grep -i "image-name"
