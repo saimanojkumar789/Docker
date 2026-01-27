@@ -9,3 +9,5 @@ what is command to pull the images
 how to see running containers
 how to check container logs
 explain about docker architecture
+What is docker registry
+How to push docker images to registry
