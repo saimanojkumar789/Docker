@@ -11,3 +11,7 @@ how to check container logs
 explain about docker architecture
 What is docker registry
 How to push docker images to registry
+
+what is docker-compose and how it works?
+write a docker-compose file?
+what can be the different names for docker compose file?

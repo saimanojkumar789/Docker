@@ -1,0 +1,68 @@
+==================== DOCKER COMPOSE ====================
+
+docker-compose up -d          → Start all services in the background (detached mode)
+docker-compose down           → Stop and remove containers, networks, and default volumes
+docker-compose stop           → Stop running services without removing containers or networks
+docker-compose start          → Start previously stopped services
+docker-compose build          → Build or rebuild images defined in docker-compose.yml
+docker-compose ps             → List containers managed by Compose for the project
+docker-compose logs           → Show logs for all services
+docker-compose logs -f <svc>  → Stream logs for a specific service
+docker-compose pause          → Pause all processes in running containers
+docker-compose unpause        → Resume paused containers
+docker-compose config         → Validate and view the merged Compose configuration
+
+==========================================================
+
+Sample docker-compose.yml
+version: "3.9"  # Compose file version
+
+services:
+  web:
+    image: nginx:latest        # Use official Nginx image
+    container_name: webapp     # Optional custom container name
+    ports:
+      - "8080:80"              # Map host 8080 → container 80
+    volumes:
+      - webdata:/usr/share/nginx/html  # Named volume
+    networks:
+      - webnet                  # Attach to custom network
+    environment:
+      - NGINX_HOST=localhost    # Example environment variable
+
+  db:
+    image: postgres:16
+    container_name: postgresdb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - webnet
+
+volumes:
+  webdata:
+  dbdata:
+
+networks:
+  webnet:
+
+
+
+
+
+
+
+
+
+
+Compose install commands:
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo yum install -y python3-pip
+sudo pip3 install docker-compose
+docker-compose --version

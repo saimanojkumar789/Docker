@@ -1,21 +1,73 @@
-To see the list of images : docker images
-To pull the image : docker pull image-name
-To create a container : docker run -d --name cont-name -p host-port:container-port image-name
-To see running containers : docker ps
-To see all containers : docker ps -a
-To stop the container : docker stop cont-name
-To stop multiple containers : docker stop cont-1 cont-2 cont-3
-To stop all containers : docker stop $(docker ps)
-To start a container : docker start cont-name
-To start multiple containers : docker start cont-1 cont-2 cont-3
-To start all containers : docker start $(docker ps -a)
-To remove a stopped container : docker rm cont-name
-To remove a running container : docker rm -f cont-name
-To remove all stopped containers : docker rm $(docker ps -a)
-To remove an image : docker rmi image-name
-To remove unused images : docker rmi $(docker images)
-To get the full info about container : docker inspect cont-name
-To get the container logs : docker logs cont-name
-To enter into the container : docker exec -it cont-name bash
-To get full info about image : docker inspect image image-name
-To find all the containers created by single image: docker ps -a | grep -i "image-name"
+==================== IMAGES ====================
+
+docker images                         → List all local images
+docker image ls                       → Same as docker images (new syntax)
+docker pull <image>                   → Download image from registry
+docker build -t <name> .              → Build image from Dockerfile
+docker tag <img> <name:tag>           → Tag or rename an image
+docker inspect <image>                → Show image metadata
+docker history <image>                → Show image layer history
+docker rmi <image>                    → Remove an image
+docker rmi $(docker images -q)        → Remove all images
+docker image prune                    → Remove unused images
+docker image prune -a                 → Remove all unused images (aggressive)
+
+==================== CONTAINERS ====================
+
+docker run <image>                    → Create & start a container
+docker run -itd --name <name> <image> → Run container in background with a name
+docker ps                             → List running containers
+docker ps -a                          → List all containers
+docker start <container>              → Start a stopped container
+docker start <cont1> <cont2>          → Start multiple containers
+docker stop <container>               → Stop a running container
+docker stop <cont1> <cont2>           → Stop multiple containers
+docker restart <container>            → Restart a container
+docker exec -it <container> bash      → Enter container shell
+docker logs <container>               → View logs
+docker logs -f <container>            → Stream logs
+docker inspect <container>            → Show container config
+docker rm <container>                 → Remove a stopped container
+docker rm -f <container>              → Force remove running container
+docker rm $(docker ps -aq)            → Remove all containers
+docker ps -a | grep <image>           → Find containers by image
+
+==================== NETWORKS ====================
+
+docker network ls                     → List all networks
+docker network inspect <network>      → Show network details
+docker network create <name>          → Create custom network
+docker network rm <network>           → Remove network
+docker network connect <net> <ctr>    → Attach container to network
+docker network disconnect <net> <ctr> → Detach container from network
+docker network prune                  → Remove unused networks
+
+# Attaching network at container creation
+docker run --network <net> <image>    → Connect container to network at run time
+
+==================== VOLUMES ====================
+
+docker volume ls                      → List all volumes
+docker volume inspect <volume>        → Show volume details
+docker volume create <name>           → Create a named volume
+docker volume rm <volume>             → Delete a volume
+docker volume prune                   → Remove unused volumes
+
+# Linking volumes to containers
+docker run -v <vol>:/container/path <image>          		→ Mount volume (read-write)
+docker run -v <vol>:/container/path:ro <image>       		→ Mount volume read-only
+docker run --mount source=<vol>,target=/path <image> 		→ Mount using --mount (read-write)
+docker run --mount source=<vol>,target=/path,readonly <image>   → Mount read-only
+docker run --mount src=<vol>,dst=/path,ro <image>    		→ Alternative --mount syntax
+
+# Bind mounts (host path)
+docker run -v /host/path:/container/path <image>          → Host folder mount
+docker run -v /host/path:/container/path:ro <image>       → Host mount read-only
+docker run --mount type=bind,source=/host/path,target=/container/path <image> → Bind mount
+docker run --mount type=bind,source=/host/path,target=/container/path,readonly <image> → Bind read-only
+
+==================== SYSTEM / CLEANUP ====================
+
+docker system df                      → Show Docker disk usage
+docker system prune                   → Remove unused containers, networks, images
+docker system prune -a                → Remove all unused (aggressive)
