@@ -66,6 +66,8 @@ docker run -v /host/path:/container/path:ro <image>       → Host mount read-on
 docker run --mount type=bind,source=/host/path,target=/container/path <image> → Bind mount
 docker run --mount type=bind,source=/host/path,target=/container/path,readonly <image> → Bind read-only
 
+/var/lib/docker/volumes/<volname>/_data/    →  default path of docker volumes 
+
 ==================== SYSTEM / CLEANUP ====================
 
 docker system df                      → Show Docker disk usage

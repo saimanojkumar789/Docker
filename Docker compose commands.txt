@@ -12,6 +12,8 @@ docker-compose pause          → Pause all processes in running containers
 docker-compose unpause        → Resume paused containers
 docker-compose config         → Validate and view the merged Compose configuration
 
+docker-compose stop <servicename>   → Stop only one service
+
 ==========================================================
 
 Sample docker-compose.yml
