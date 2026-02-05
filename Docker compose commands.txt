@@ -20,37 +20,43 @@ Sample docker-compose.yml
 version: "3.9"  # Compose file version
 
 services:
-  web:
+  app:
     image: nginx:latest        # Use official Nginx image
-    container_name: webapp     # Optional custom container name
+    container_name: appcont     # Optional custom container name
     ports:
       - "8080:80"              # Map host 8080 → container 80
     volumes:
-      - webdata:/usr/share/nginx/html  # Named volume
+      - appvolume:/usr/share/nginx/html  # Named volume
     networks:
-      - webnet                  # Attach to custom network
+      - appnetwork                  # Attach to custom network
+      - dbnetwork
     environment:
       - NGINX_HOST=localhost    # Example environment variable
 
   db:
     image: postgres:16
-    container_name: postgresdb
+    deploy:
+      replicas: 2
     ports:
-      - "5432:5432"
+      - "5432"
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
     volumes:
-      - dbdata:/var/lib/postgresql/data
+      - dbvolume:/var/lib/postgresql/data:ro
     networks:
-      - webnet
+      - dbnetwork
+      - appnetwork
 
 volumes:
-  webdata:
-  dbdata:
+  appvolume:
+  dbvolume:
 
 networks:
-  webnet:
+  appnetwork:
+    driver: bridge
+  dbnetwork:
+    driver: bridge
 
 
 
