@@ -1,0 +1,129 @@
+# 🐳 Docker Swarm Cheat Sheet
+
+---
+
+## 📌 Concepts
+
+- **Compose** → Create multiple services on a **single host** using `docker-compose.yml`  
+- **Swarm** → Create **single services** that can run on **multiple hosts**  
+- **Stack** → Deploy **multiple services** across **multiple hosts** using a stack file (`docker-compose.yml`)
+
+---
+
+## 🚀 Key Features
+
+- **Self-healing** → Automatically restarts failed containers to maintain desired state  
+- **Scaling** → Adjust the number of replicas dynamically  
+- **High Availability** → Services run on multiple nodes to ensure uptime  
+- **Update & Rollback** → Rolling updates with ability to revert to previous versions
+
+---
+
+## 🛠 Docker Swarm Commands
+
+- **Initialize Swarm**  
+  → `docker swarm init` → Initialize the current node as a **Swarm manager**
+
+- **Manage nodes**  
+  → `docker node ls` → List all nodes in the Swarm  
+  → `docker node rm <node-name>` → Remove a node from the Swarm  
+
+- **Create a service**  
+  → `docker service create --name <svcname> --replicas 3 --publish 1111:80 <image>`  (img must be from docker hub)
+    → Create a service with 3 replicas and publish host port 1111 → container port 80
+
+- **List services & tasks**  
+  → `docker service ls` → List all services  
+  → `docker service ps <svcname>` → Show all tasks (containers), including stopped/failed ones  
+  → `docker service ps <svcname> --filter "desired-state=running"` → Show tasks Swarm wants running  
+  → `docker service ps <svcname> --filter "current-state=running"` → Show **currently running tasks only**
+
+- **Scale services**  
+  → `docker service scale <svcname>=3` → scaling 
+
+- **Update & rollback**  
+  → `docker service update <svcname> --image=<newimage>` → Update service to a new image (rolling update)  
+  → `docker service rollback <svcname>` → Rollback service to the previous version
+
+- **Remove service**  
+  → `docker service rm <svcname>` → Delete the service from Swarm
+
+- **Swarm join tokens**  
+  → `docker swarm join-token worker` → Get the command/token to add a worker node  
+  → `docker swarm join-token manager` → Get the command/token to add a manager node
+
+- **Leave Swarm**  
+  → `docker swarm leave` → Node leaves Swarm gracefully  
+  → `docker swarm leave --force` → Force a node to leave immediately
+
+---
+
+## 🔧 Additional Useful Commands
+
+- **Inspect services & nodes**  
+  → `docker service inspect <svcname>` → Detailed info about service (VIP, networks, tasks)  
+  → `docker node inspect <node>` → Inspect node configuration and role
+
+- **View logs**  
+  → `docker service logs <svcname>` → View logs for all tasks of a service
+
+- **Networking**  
+  → `docker network ls` → List overlay networks in Swarm  
+  → `docker network inspect <network>` → Inspect a network and connected containers
+
+---
+
+## 💡 Quick Tips for Interviews
+
+- **Single-node Swarm** → Can test scaling, service creation, self-healing  
+- **Published ports** → Only **one host port** maps to the service VIP, not per container  
+- **Rolling updates** → Updates containers **one by one**, zero downtime  
+- **Self-healing example** → Even `--replicas 1` will restart a failed container automatically  
+- **Service vs Container** → `docker service` = Swarm-level, `docker run` = single container
+
+---
+
+## ⚡ Example Commands
+
+- Initialize Swarm  
+  → `docker swarm init`
+
+- List nodes  
+  → `docker node ls`
+
+- Create service with 3 replicas and publish port  
+  → `docker service create --name devops --replicas 3 --publish 1111:80 nginx`
+
+- List services  
+  → `docker service ls`
+
+- Show all tasks for a service  
+  → `docker service ps devops`
+
+- Show only running tasks  
+  → `docker service ps devops --filter "current-state=running"`
+
+- Scale service  
+  → `docker service scale devops=3`
+
+- Remove service  
+  → `docker service rm devops`
+
+- Update service  
+  → `docker service update devops --image nginx:latest`
+
+- Rollback service  
+  → `docker service rollback devops`
+
+- Get worker join token  
+  → `docker swarm join-token worker`
+
+- Get manager join token  
+  → `docker swarm join-token manager`
+
+- Leave Swarm  
+  → `docker swarm leave`  
+  → `docker swarm leave --force`
+
+- Remove node  
+  → `docker node rm <node-name>`

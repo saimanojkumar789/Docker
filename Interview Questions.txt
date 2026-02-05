@@ -15,3 +15,6 @@ How to push docker images to registry
 what is docker-compose and how it works?
 write a docker-compose file?
 what can be the different names for docker compose file?
+
+1. what is swarm and how it works
+2. diff b/w compose and swarm
