@@ -1,3 +1,10 @@
+==================== Docker Architecture ===============
+
+Docker Host: The machine that runs the Docker Daemon and manages containers.
+Docker Client: The tool (CLI or GUI) used by users to interact with Docker.
+Docker Registry: A storage system where Docker images are stored, shared, and retrieved.
+
+
 ==================== IMAGES ====================
 
 docker images                         → List all local images
