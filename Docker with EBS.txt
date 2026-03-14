@@ -1,0 +1,12 @@
+Todays notes :
+
+fdisk -l to get the disk partitions
+1. mkfs -t xfs /dev/nvme1n1
+2.  mount /dev/nvme1n1 /var/lib/docker
+3. systemctl restart docker
+4. pull some images
+5. check with "df -h"
+
+
+
+docker run -itd --name cont1 -p 1111:80 --cpus="0.25" --memory=250m nginx
